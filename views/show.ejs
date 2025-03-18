@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Details</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" /> 
+</head>
+<body>
+    <%- include('./partials/_navbar.ejs') %>
+    <h1>Food Item Details</h1>
+    <% if (food) { %>
+        <div>
+            <h2><%= food.food %></h2>
+            <p>Unique ID: <%= food._id %></p>
+            
+            <div>
+                <a href="/users/<%= user._id %>/foods/<%= food._id %>/edit">Edit this Item</a>
+                <a href="/users/<%= user._id %>/foods">Back to Pantry</a>
+            </div>
+        </div>
+    <% } else { %>
+        <p>Food item not found.</p>
+    <% } %>
+</body>
+</html>

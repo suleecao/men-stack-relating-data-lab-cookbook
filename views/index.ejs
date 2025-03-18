@@ -3,21 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" /> 
+  <title>Your Pantry</title>
 </head>
 <body>
+    <%- include('./partials/_navbar.ejs') %>
+    <h1>Organize Your Pantry(somewhat)</h1>
   <% if (user) { %>
-    <h1>Welcome to the app, <%= user.username %>!</h1>
+    <h2>Welcome to the pantry app, <%= user.username %>!</h2>
     <p>
-      <a href="/auth/sign-out">Sign out</a>
-    </p>
-  <% } else { %>
-    <h1>Welcome to the app, guest.</h1>
-    <p>
-      <a href="/auth/sign-up">Sign up</a> or
-      <a href="/auth/sign-in">Sign in</a>.
-    </p>
+            <% if (foods && foods.length > 0) { %>
+                <ul>
+                    <% foods.forEach(item => { %>
+                        <li>
+                            <%= item.food %>
+                            <a href="/users/<%= user._id %>/foods/<%= item._id %>">View Details</a>
+                            <a href="/users/<%= user._id %>/foods/<%= item._id %>/edit">Edit</a>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>Your pantry is empty!</p>
+            <% } %>
+            <a href="/users/<%= user._id %>/foods/new">Add New Item</a>
+        </body>
+        </html>
   <% } %>
-  <p><a href="/vip-lounge">Get into the VIP Users Only lounge!</a></p>
 </body>
 </html>
